@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semaphore-Based Logistics System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            background: #e7f3e7;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Logistics System</h1>
+        <button onclick="performAction('load')">Load Goods</button>
+        <button onclick="performAction('unload')">Unload Goods</button>
+        <button onclick="performAction('import')">Import Goods</button>
+        <button onclick="performAction('export')">Export Goods</button>
+        <button onclick="performAction('quit')">Quit</button>
+        <div class="output" id="output">
+            System output will appear here.
+        </div>
+    </div>
+
+    <script>
+        function performAction(action) {
+            fetch(`/action/${action}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('output').innerText = data;
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('output').innerText = 'An error occurred.';
+                });
+        }
+    </script>
+</body>
+</html>
